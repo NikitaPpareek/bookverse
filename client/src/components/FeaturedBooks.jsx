@@ -1,106 +1,72 @@
 import BookCard from "./BookCard";
 
 const books = [
-
   {
-    id: 1,
     title: "Atomic Habits",
     author: "James Clear",
-    price: 499,
+    category: "Self Growth",
     image:
       "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
   },
 
   {
-    id: 2,
-    title: "Rich Dad Poor Dad",
-    author: "Robert Kiyosaki",
-    price: 399,
+    title: "Deep Work",
+    author: "Cal Newport",
+    category: "Productivity",
     image:
       "https://images.unsplash.com/photo-1512820790803-83ca734da794",
   },
 
   {
-    id: 3,
-    title: "The Alchemist",
-    author: "Paulo Coelho",
-    price: 599,
+    title: "The Psychology of Money",
+    author: "Morgan Housel",
+    category: "Finance",
     image:
       "https://images.unsplash.com/photo-1521587760476-6c12a4b040da",
   },
-
 ];
 
-const FeaturedBooks = () => {
+function FeaturedBooks() {
+
   return (
 
-    <section className="
-    py-24
+    <section className="max-w-[95%] mx-auto py-24">
 
-    bg-[#f8f3ea]
-    dark:bg-zinc-950
+      {/* Heading */}
+      <div className="text-center mb-16">
 
-    transition-colors duration-500">
+        <p className="uppercase tracking-[8px] text-[#82BDA8] font-semibold mb-4">
 
-      <div className="
-      max-w-7xl
-      mx-auto
-      px-6">
+          Featured Collection
 
-        {/* Heading */}
-        <div className="text-center mb-16">
+        </p>
 
-          <h1 className="
-          text-5xl
-          font-extrabold
+        <h2 className="text-6xl font-black text-[#2D2D2D]">
 
-          text-stone-900
-          dark:text-white">
+          Books Readers Love
 
-            Featured Books
+        </h2>
 
-          </h1>
+      </div>
 
-          <p className="
-          mt-5
-          text-lg
+      {/* Books Grid */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-          text-stone-600
-          dark:text-zinc-400">
+        {books.map((book, index) => (
 
-            Explore books readers are loving right now.
+          <BookCard
+            key={index}
+            book={book}
+          />
 
-          </p>
-
-        </div>
-
-        {/* Grid */}
-        <div className="
-        grid
-        grid-cols-1
-        sm:grid-cols-2
-        lg:grid-cols-3
-
-        gap-10">
-
-          {books.map((book) => (
-
-            <BookCard
-              key={book.id}
-              image={book.image}
-              title={book.title}
-              author={book.author}
-              price={book.price}
-            />
-
-          ))}
-
-        </div>
+        ))}
 
       </div>
 
     </section>
+
   );
-};
+
+}
 
 export default FeaturedBooks;

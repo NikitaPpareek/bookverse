@@ -1,44 +1,32 @@
-import { useState, useEffect } from "react";
-
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import SearchBar from "./components/SearchBar";
+import CategoryPills from "./components/CategoryPills";
 import FeaturedBooks from "./components/FeaturedBooks";
+import Footer from "./components/Footer";
 
 function App() {
 
-  // Dark mode by default
-  const [darkMode, setDarkMode] = useState(true);
-
-  useEffect(() => {
-
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-  }, [darkMode]);
-
   return (
 
-    <div className="
-    min-h-screen
-    transition-colors duration-500
+    <div className="bg-[#F7F4EA] dark:bg-[#121212] transition-all duration-300 min-h-screen overflow-x-hidden">
 
-    bg-[#f8f3ea]
-    dark:bg-zinc-950">
-
-      <Navbar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-      />
+      <Navbar />
 
       <Hero />
 
+      <SearchBar />
+
+      <CategoryPills />
+
       <FeaturedBooks />
 
+      <Footer />
+
     </div>
+
   );
+
 }
 
 export default App;

@@ -1,93 +1,71 @@
-const BookCard = ({ image, title, author, price }) => {
+function BookCard({ book }) {
+
   return (
 
-    <div className="
-    group
-    rounded-[32px]
-    overflow-hidden
+    <div className="bg-white rounded-[30px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
 
-    bg-[#f5efe4]
-    dark:bg-zinc-900
-
-    hover:-translate-y-3
-    hover:shadow-2xl
-
-    transition-all duration-500">
-
-      {/* Image */}
-      <div className="overflow-hidden">
-
-        <img
-          src={image}
-          alt={title}
-          className="
-          w-full
-          h-80
-          object-cover
-
-          group-hover:scale-110
-
-          transition-transform duration-500"
-        />
-
-      </div>
+      {/* Book Image */}
+      <img
+        src={book.image}
+        alt={book.title}
+        className="w-full h-[320px] object-cover"
+      />
 
       {/* Content */}
       <div className="p-6">
 
-        <h2 className="
-        text-2xl
-        font-bold
+        {/* Category */}
+        <span className="inline-block px-4 py-2 rounded-full bg-[#A8C89A] text-sm font-medium mb-4">
 
-        text-stone-800
-        dark:text-white">
+          {book.category}
 
-          {title}
+        </span>
 
-        </h2>
+        {/* Title */}
+        <h3 className="text-2xl font-bold text-[#2D2D2D] mb-2 line-clamp-2">
 
-        <p className="
-        mt-2
+          {book.title}
 
-        text-stone-600
-        dark:text-zinc-400">
+        </h3>
 
-          {author}
+        {/* Author */}
+        <p className="text-[#6B6B6B] mb-4">
+
+          {book.author}
 
         </p>
 
-        {/* Bottom */}
-        <div className="
-        mt-6
-        flex items-center justify-between">
+        {/* Price + Rating */}
+        <div className="flex items-center justify-between mb-6">
 
-          <span className="
-          text-2xl
-          font-bold
+          <span className="text-3xl font-black text-[#7A4A84]">
 
-          text-orange-600
-          dark:text-emerald-400">
-
-            ₹{price}
+            ₹499
 
           </span>
 
-          <button className="
-          px-5 py-2.5
-          rounded-xl
-          text-white
+          <span className="text-[#F4B400] font-semibold">
 
-          bg-orange-500
-          hover:bg-orange-600
+            ⭐ 4.5
 
-          dark:bg-emerald-500
-          dark:hover:bg-emerald-600
+          </span>
 
-          hover:scale-105
+        </div>
 
-          transition-all duration-300">
+        {/* Buttons */}
+        <div className="flex gap-4">
 
-            Add
+          {/* Add Cart */}
+          <button className="flex-1 bg-[#7A4A84] hover:bg-[#693A73] text-white py-3 rounded-2xl font-semibold transition-all duration-300">
+
+            Add to Cart
+
+          </button>
+
+          {/* Details */}
+          <button className="flex-1 border border-[#7A4A84] text-[#7A4A84] hover:bg-[#7A4A84] hover:text-white py-3 rounded-2xl font-semibold transition-all duration-300">
+
+            Details
 
           </button>
 
@@ -96,7 +74,9 @@ const BookCard = ({ image, title, author, price }) => {
       </div>
 
     </div>
+
   );
-};
+
+}
 
 export default BookCard;

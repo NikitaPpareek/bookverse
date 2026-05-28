@@ -1,144 +1,73 @@
-const Hero = () => {
+function Hero() {
+
   return (
 
-    <section className="
-    w-full
-    py-24
+    <section className="max-w-[95%] mx-auto py-20 grid md:grid-cols-2 gap-16 items-center transition-all duration-300">
 
-    bg-[#f8f3ea]
-    dark:bg-zinc-950
+      {/* Left */}
+      <div>
 
-    transition-colors duration-500">
+        <p className="uppercase tracking-[8px] text-[#82BDA8] font-semibold mb-6">
 
-      <div className="
-      max-w-7xl
-      mx-auto
-      px-6
+          Discover
 
-      flex flex-col
-      md:flex-row
+        </p>
 
-      items-center
-      justify-between
+        <h1 className="text-7xl font-black leading-tight text-[#2D2D2D] dark:text-white mb-8">
 
-      gap-16">
+          Find Your
+          <br />
 
-        {/* Left Content */}
-        <div className="flex-1">
+          Next Favorite
 
-          <h1 className="
-          text-6xl
-          md:text-7xl
+          <span className="text-[#7A4A84]">
 
-          font-extrabold
-          leading-tight
+            {" "}Book
 
-          text-stone-900
-          dark:text-white">
+          </span>
 
-            Discover Your Next{" "}
+        </h1>
 
-            <span className="
-            bg-gradient-to-r
-            from-orange-500
-            to-amber-700
+        <p className="text-[#5E5E5E] dark:text-[#B8B8B8] text-xl leading-relaxed max-w-xl mb-10">
 
-            dark:from-emerald-400
-            dark:to-teal-500
+          Explore thousands of books from different genres,
+          authors and categories in one beautiful platform.
 
-            text-transparent
-            bg-clip-text">
+        </p>
 
-              Favorite Book
+        <div className="flex gap-6">
 
-            </span>
+          <button className="px-8 py-4 rounded-2xl bg-[#7A4A84] text-white font-semibold text-lg hover:bg-[#693A73] transition-all duration-300 shadow-lg">
 
-          </h1>
+            Explore Books
 
-          <p className="
-          mt-8
-          text-xl
-          max-w-2xl
+          </button>
 
-          text-stone-600
-          dark:text-zinc-400">
+          <button className="px-8 py-4 rounded-2xl border border-[#7A4A84] text-[#7A4A84] dark:text-white font-semibold text-lg hover:bg-[#7A4A84] hover:text-white transition-all duration-300">
 
-            Explore thousands of books from different genres,
-            authors and categories in one beautiful platform.
+            Learn More
 
-          </p>
-
-          {/* Buttons */}
-          <div className="mt-10 flex gap-5">
-
-            <button className="
-            px-7 py-3.5
-            rounded-2xl
-            text-white
-
-            bg-gradient-to-r
-            from-orange-500
-            to-amber-700
-
-            dark:from-emerald-500
-            dark:to-teal-500
-
-            hover:scale-105
-
-            transition-all duration-300">
-
-              Explore Books
-
-            </button>
-
-            <button className="
-            px-7 py-3.5
-            rounded-2xl
-            border
-
-            border-orange-500
-            text-orange-600
-
-            hover:bg-orange-500
-            hover:text-white
-
-            dark:border-emerald-500
-            dark:text-emerald-400
-            dark:hover:bg-emerald-500
-
-            transition-all duration-300">
-
-              Learn More
-
-            </button>
-
-          </div>
-
-        </div>
-
-        {/* Right Image */}
-        <div className="
-        flex-1
-        flex justify-center">
-
-          <img
-            src="https://images.unsplash.com/photo-1512820790803-83ca734da794"
-            alt="Books"
-            className="
-            w-full
-            max-w-xl
-
-            rounded-[40px]
-            shadow-2xl
-            object-cover"
-          />
+          </button>
 
         </div>
 
       </div>
 
+      {/* Right */}
+      <div>
+
+        <img
+          src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"
+          alt="Books"
+          className="rounded-[40px] shadow-2xl object-cover h-[550px] w-full"
+        />
+
+      </div>
+
     </section>
+
   );
-};
+
+}
 
 export default Hero;
