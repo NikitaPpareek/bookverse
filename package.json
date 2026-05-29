@@ -1,0 +1,11 @@
+{
+  "name": "bookverse",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client",
+    "install:all": "npm install && npm install --prefix client"
+  }
+}
