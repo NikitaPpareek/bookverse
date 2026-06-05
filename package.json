@@ -7,8 +7,5 @@
     "build": "npm run build --prefix client",
     "preview": "npm run preview --prefix client",
     "install:all": "npm install && npm install --prefix client"
-  },
-  "dependencies": {
-    "firebase": "^12.14.0"
   }
 }
