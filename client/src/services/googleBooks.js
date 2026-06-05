@@ -62,6 +62,38 @@ export const buildSearchQuery = (q, filters = {}) => {
   return query;
 };
 
+// export const searchBooks = async (
+//   q,
+//   {
+//     startIndex = 0,
+//     maxResults = 20,
+//     orderBy = "relevance",
+//     filterType = "all",
+//     genre = "",
+//     freeEbooks = false,
+//     newReleases = false,
+//   } = {}
+// ) => {
+//   const query = buildSearchQuery(q, { filterType, genre, freeEbooks });
+//   const params = new URLSearchParams({
+//     q: query,
+//     startIndex: String(startIndex),
+//     maxResults: String(Math.min(maxResults, 40)),
+//     orderBy: newReleases ? "newest" : orderBy,
+//     printType: "books",
+//   });
+//   if (freeEbooks) params.set("filter", "ebooks");
+
+//   const res = await fetch(`${BASE}/volumes?${params}`);
+//   if (!res.ok) throw new Error("Google Books API request failed");
+//   const data = await res.json();
+
+//   return {
+//     totalItems: data.totalItems || 0,
+//     books: (data.items || []).map(mapGoogleBook),
+//     hasMore: (data.totalItems || 0) > startIndex + (data.items?.length || 0),
+//   };
+// };
 export const searchBooks = async (
   q,
   {
@@ -74,30 +106,63 @@ export const searchBooks = async (
     newReleases = false,
   } = {}
 ) => {
-  const query = buildSearchQuery(q, { filterType, genre, freeEbooks });
+  const query = buildSearchQuery(q, {
+    filterType,
+    genre,
+    freeEbooks,
+  });
+
   const params = new URLSearchParams({
     q: query,
     startIndex: String(startIndex),
     maxResults: String(Math.min(maxResults, 40)),
     orderBy: newReleases ? "newest" : orderBy,
     printType: "books",
+    key: API_KEY,
   });
-  if (freeEbooks) params.set("filter", "ebooks");
 
-  const res = await fetch(`${BASE}/volumes?${params}`);
-  if (!res.ok) throw new Error("Google Books API request failed");
+  if (freeEbooks) {
+    params.set("filter", "ebooks");
+  }
+
+  const url = `${BASE}/volumes?${params.toString()}`;
+
+  console.log("Google Books Request:", url);
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Google Books Error:", errorText);
+    throw new Error(`Google Books API request failed (${res.status})`);
+  }
+
   const data = await res.json();
 
   return {
     totalItems: data.totalItems || 0,
     books: (data.items || []).map(mapGoogleBook),
-    hasMore: (data.totalItems || 0) > startIndex + (data.items?.length || 0),
+    hasMore:
+      (data.totalItems || 0) >
+      startIndex + (data.items?.length || 0),
   };
 };
 
+// export const getBookById = async (id) => {
+//   const res = await fetch(`${BASE}/volumes/${id}`);
+//   if (!res.ok) throw new Error("Book not found");
+//   const data = await res.json();
+//   return mapGoogleBook(data);
+// };
 export const getBookById = async (id) => {
-  const res = await fetch(`${BASE}/volumes/${id}`);
-  if (!res.ok) throw new Error("Book not found");
+  const res = await fetch(
+    `${BASE}/volumes/${id}?key=${API_KEY}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Book not found");
+  }
+
   const data = await res.json();
   return mapGoogleBook(data);
 };
@@ -119,3 +184,4 @@ export const SECTION_QUERIES = {
   editorsChoice: "critically acclaimed must read",
   popularAuthors: "Stephen King OR J.K. Rowling OR Colleen Hoover",
 };
+const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
