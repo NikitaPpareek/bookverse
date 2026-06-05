@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineSearch, HiOutlineMoon, HiOutlineSun, HiMenu, HiX } from "react-icons/hi";
 import { FiBookOpen } from "react-icons/fi";
 import { useTheme } from "../../contexts/ThemeContext";
-import { useUser } from "../../contexts/UserContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const navLinks = [
   { to: "/", label: "Home", end: true },
@@ -15,7 +15,9 @@ const navLinks = [
 
 export default function Navbar() {
   const { darkMode, toggleTheme } = useTheme();
-  const { user, isSignedIn } = useUser();
+  const { user } = useAuth();
+  const isSignedIn = !!user;
+
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -86,13 +88,19 @@ export default function Navbar() {
             </button>
 
             <Link
-              to="/signin"
+              to={isSignedIn ? "/dashboard" : "/login"}
+              // to={isSignedIn ? "/library" : "/login"}
+              
               className="hidden sm:inline-flex px-3.5 py-1.5 rounded-lg bg-primary text-white text-xs font-bold tracking-wide hover:bg-primary-hover transition-all shadow-sm hover:shadow-md"
             >
-              {isSignedIn ? user.name?.split(" ")[0] || "Account" : "Sign In"}
+              {isSignedIn ? user?.name?.split(" ")[0] || "Account" : "Sign In"}
             </Link>
 
-            <button className={`lg:hidden ${iconBtn}`} onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
+            <button
+              className={`lg:hidden ${iconBtn}`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Menu"
+            >
               {mobileOpen ? (
                 <HiX size={18} className="text-primary dark:text-lavender" />
               ) : (
@@ -123,6 +131,7 @@ export default function Navbar() {
                   </NavLink>
                 </li>
               ))}
+
               <li>
                 <Link
                   to="/library"
@@ -132,9 +141,10 @@ export default function Navbar() {
                   My Library
                 </Link>
               </li>
+
               <li>
                 <Link
-                  to="/signin"
+                  to={isSignedIn ? "/dashboard" : "/login"}
                   onClick={() => setMobileOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm font-bold text-primary dark:text-lavender"
                 >

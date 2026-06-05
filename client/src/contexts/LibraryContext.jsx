@@ -59,6 +59,16 @@ export const LibraryProvider = ({ children }) => {
   const removeFromWishlist = (id) =>
     setWishlist((prev) => prev.filter((i) => getBookId(i) !== id));
 
+  // Wipes all user-specific library records instantly on logout
+  const clearLibrary = useCallback(() => {
+    setWishlist([]);
+    setSaved([]);
+    setReadingList([]);
+    localStorage.removeItem(KEYS.wishlist);
+    localStorage.removeItem(KEYS.saved);
+    localStorage.removeItem(KEYS.reading);
+  }, []);
+
   return (
     <LibraryContext.Provider
       value={{
@@ -72,6 +82,7 @@ export const LibraryProvider = ({ children }) => {
         toggleSaved,
         toggleReadingList,
         removeFromWishlist,
+        clearLibrary, // Exposed to the app here
       }}
     >
       {children}

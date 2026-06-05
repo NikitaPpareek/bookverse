@@ -1,8 +1,26 @@
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import { BrowserRouter } from "react-router-dom";
+// import App from "./App.jsx";
+// import "./index.css";
+
+// const theme = localStorage.getItem("bv_theme");
+// if (theme === "dark") document.documentElement.classList.add("dark");
+
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   </React.StrictMode>
+// );
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
+
+import { AuthProvider } from "./contexts/AuthContext";
 
 const theme = localStorage.getItem("bv_theme");
 if (theme === "dark") document.documentElement.classList.add("dark");
@@ -10,7 +28,9 @@ if (theme === "dark") document.documentElement.classList.add("dark");
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
