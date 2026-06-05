@@ -25,6 +25,14 @@ app.use(morgan("dev"));
 
 app.get("/api/health", (_, res) => res.json({ success: true, message: "BookVerse API is running" }));
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "BookVerse Backend Running",
+  });
+});
+
+
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/cart", cartRoutes);
